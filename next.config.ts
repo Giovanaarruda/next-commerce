@@ -1,10 +1,8 @@
-import type { NextConfig } from "next";
-import path from "path";
-
-const nextConfig: NextConfig = {
-  turbopack: {
-    root: path.resolve(__dirname),
-  }
+/**@type {import("next").NextConfig} */
+const nextConfig = {
+  images: {
+    domains: ["fakestoreapi.com"],
+  },
 };
 
-export default nextConfig;
+module.exports = nextConfig;
