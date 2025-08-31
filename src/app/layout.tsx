@@ -5,6 +5,8 @@ import "./globals.css";
 import Navbar from "./components/Navbar";
 import {  ClerkProvider, SignedIn, SignedOut, RedirectToSignIn } from '@clerk/nextjs';
 import { ptBR } from '@clerk/localizations';
+import "bootstrap-icons/font/bootstrap-icons.css";
+
 
 const inter = Inter({ subsets: ["latin"]});
 
