@@ -1,6 +1,10 @@
 import Link from "next/link";
 import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs';
+import { useCartStore } from "@/src/store";
+
 function Navbar() {
+  const useStore = useCartStore();
+
     return (
            <nav className="fixed top-0 w-full flex items-center py-2 px-8 justify-between z-50 backdrop-blur-md">
             <Link href="/"
