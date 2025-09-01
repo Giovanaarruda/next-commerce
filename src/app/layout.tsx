@@ -6,6 +6,8 @@ import Navbar from "./components/Navbar";
 import {  ClerkProvider, SignedIn, SignedOut, RedirectToSignIn } from '@clerk/nextjs';
 import { ptBR } from '@clerk/localizations';
 import "bootstrap-icons/font/bootstrap-icons.css";
+import Home from "./page";
+import Hydrate from "./components/Hydrate";
 
 
 const inter = Inter({ subsets: ["latin"]});
@@ -23,12 +25,11 @@ export default function RootLayout({
   return (
     <ClerkProvider localization={ptBR}>
     <html lang="en">
-      <body className={clsx(inter.className, "bg-slate-700")}
-      >
-        <Navbar />
-        <main className="min-h-screen bg-gradient-to-br from-orange-700 via-pink-700 to-purple-900 p-18">
-        {children}
-        </main>
+      <body className={clsx(inter.className, "bg-slate-700")}>
+        <Hydrate>
+          <Navbar />
+        <main className="min-h-screen bg-gradient-to-br from-orange-700 via-pink-700 to-purple-900 p-18">{children}</main>
+        </Hydrate>
       </body>
     </html>
     </ClerkProvider>
