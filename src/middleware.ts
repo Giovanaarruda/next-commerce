@@ -1,10 +1,25 @@
-import { clerkMiddleware } from '@clerk/nextjs/server'
+import { clerkMiddleware, createRouteMatcher} from '@clerk/nextjs/server'
 
-export default clerkMiddleware() 
+const isPublicRoute = createRouteMatcher([
+  "/",
+  "/product(.*)", 
+  "/sign-in", 
+  "/sign-up",
+]);
+
+export default clerkMiddleware(async (auth, req) => {
+  if (isPublicRoute(req)) {
+    return; // rota pública → deixa passar
+  }
+
+  // rota privada → exige que o usuário esteja logado
+  const { userId } = await auth();
+  if (!userId) {
+    // redireciona para o login se não estiver autenticado
+    return Response.redirect("/sign-in");
+  }
+});
 
 export const config = {
-  matcher: [
-    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
-    '/(api|trpc)(.*)',
-  ],
+  matcher: ["/((?!_next|.*\\..*).*)", "/"],
 }
